@@ -1,3 +1,4 @@
+
 var canvas = document.querySelector('canvas');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
@@ -10,40 +11,14 @@ window.addEventListener('resize',
     }
 );
 
-// c.fillStyle = "blue";
-// c.fillRect(100, 100, 100, 100);
-// c.fillStyle = "green";
-// c.fillRect(500, 500, 100, 100);
-// c.fillStyle = "purple";
-// c.fillRect(300, 300, 100, 600);
-
-
-// c.beginPath();
-// c.moveTo(50, 100);
-// c.lineTo(100, 200);
-// c.lineTo(500, 900);
-// c.lineTo(50, 400);
-// c.strokeStyle = "black";
-// c.stroke();
-
-
-
-// for (var i = 0; i < 5; i++) {  
-//     var a = Math.random();
-//     var b = Math.random();
-//     var d = Math.random();
-
-//     var x = Math.random() * window.innerWidth;
-//     var y = Math.random() * window.innerHeight;
-// c.beginPath();
-// c.arc(x, y, 70, 0, Math.PI * 2, false);
-// c.strokeStyle = 'rgb(a, b, d)';
-// c.stroke();
-// }
+var repulsionDistance = 150;
+var connectionDistance = 125;
+var numParticles = 500;
+var particleSpeedVector = 2;
 
 var mouse = {
     x: undefined,
-    y: undefined
+    y: undefined,
 };
 
 var colorArray = [
@@ -70,7 +45,7 @@ function Circle(x, y, dx, dy, radius, boundary) {
     this.dy = dy;
     this.minRadius = radius;
     this.radius = radius;
-    this.color = 'white';
+    this.color = colorArray[Math.floor(Math.random()*(colorArray.length-1))];
     this.boundary = boundary;
 }
     Circle.prototype.draw = function () {
@@ -91,20 +66,23 @@ function Circle(x, y, dx, dy, radius, boundary) {
         this.y += this.dy;
         this.draw();
 
-        if (mouse.x - this.x < 50 && mouse.x - this.x > -50
-            && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
-            if (this.radius < 40) {
-                this.radius += 1;
-            }
+        if (distance(mouse, this) < repulsionDistance) {
+            var dx = this.x - mouse.x;
+            var dy = this.y - mouse.y;
+            var angle = Math.atan2(dy, dx);
+            var distancetoRadius = repulsionDistance - (distance(mouse, this));
 
-        } else if (this.radius > this.minRadius) {
-            this.radius -= 1;
+            var newXchange = Math.cos(angle) * distancetoRadius;
+            var newYchange = Math.sin(angle) * distancetoRadius;
+            this.x += newXchange + 1;
+            this.y += newYchange + 1;
         }
-        for (var i = 0; i < particleArray.length; i++) {            
-            for (var j = i + 1; j < particleArray.length; j++) {
-                if (distance(particleArray[i], particleArray[j]) < 125) {
-                    drawline(particleArray[i], particleArray[j]);
-                }
+
+        for (var i = 0; i < particleArray.length; i++) {  
+            var dist = distance(this, particleArray[i]);
+            if (dist < connectionDistance) {
+                var fraction = (connectionDistance/dist)*0.15;
+                drawline(this, particleArray[i], fraction);
             }
         }
     };
@@ -117,17 +95,17 @@ function distance (circleObj1, circleObj2) {
     return dist;
 }
 
-function drawline(circleObj1, circleObj2) {
+function drawline(circleObj1, circleObj2, opacity) {
     var x1 = circleObj1.x;
     var y1 = circleObj1.y;
     var x2 = circleObj2.x;
     var y2 = circleObj2.y;
-
+    
     c.beginPath();
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
-    c.lineWidth = 0.01;
-    c.strokeStyle= "rgba(255, 255, 255, 0.25)";
+    c.lineWidth = 0.4;
+    c.strokeStyle= `rgba(255, 255, 255, ${opacity})`;
     c.stroke();
     c.closePath();
 }
@@ -137,26 +115,26 @@ var particleArray = [];
 
 function init() {
     particleArray = [];
-    for (var i = 0; i < 150; i++) {
+    for (var i = 0; i < numParticles; i++) {
         var radius = 1.5;
 
         var x = Math.random() * (innerWidth - radius * 2) + radius;
         var y = Math.random() * (innerHeight - radius * 2) + radius;
-        var dx = ((Math.random() - 0.5) * 1.5);
-        var dy = ((Math.random() - 0.5) * 1.5);
+        var dx = ((Math.random() - 0.5) * particleSpeedVector);
+        var dy = ((Math.random() - 0.5) * particleSpeedVector);
         var boundary = 200;
         particleArray.push(new Circle(x, y, dx, dy, radius, boundary));
     }
 
 }
 
-for (var i = 0; i < 150; i++) {
+for (var i = 0; i < numParticles; i++) {
     var radius = 1.5;
 
     var x = Math.random() * (innerWidth - radius * 2) + radius;
     var y = Math.random() * (innerHeight - radius * 2) + radius;
-    var dx = ((Math.random() - 0.5) * 1.5);
-    var dy = ((Math.random() - 0.5) * 1.5);
+    var dx = ((Math.random() - 0.5) * particleSpeedVector);
+    var dy = ((Math.random() - 0.5) * particleSpeedVector);
     var boundary = 200;
     particleArray.push(new Circle(x, y, dx, dy, radius, boundary));
 }
