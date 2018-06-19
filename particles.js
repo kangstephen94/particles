@@ -11,10 +11,12 @@ window.addEventListener('resize',
     }
 );
 
+
 var repulsionDistance = 150;
 var connectionDistance = 125;
 var numParticles = 500;
 var particleSpeedVector = 2;
+var particleArray = [];
 
 var mouse = {
     x: undefined,
@@ -36,6 +38,18 @@ window.addEventListener('mousemove',
     }
 );
 
+
+window.addEventListener('click', 
+    function(event) {
+        var x = (((Math.random()-0.5)*repulsionDistance) + mouse.x);
+        var y = (((Math.random()-0.5)*repulsionDistance) + mouse.y);
+        var radius = 1.5;
+        var dx = ((Math.random() - 0.5) * particleSpeedVector);
+        var dy = ((Math.random() - 0.5) * particleSpeedVector);
+        var boundary = 200;
+        particleArray.push(new Circle(x, y, dx, dy, radius, boundary));
+    }
+);
 
 
 function Circle(x, y, dx, dy, radius, boundary) {
@@ -111,8 +125,6 @@ function drawline(circleObj1, circleObj2, opacity) {
 }
 
 
-var particleArray = [];
-
 function init() {
     particleArray = [];
     for (var i = 0; i < numParticles; i++) {
@@ -130,7 +142,6 @@ function init() {
 
 for (var i = 0; i < numParticles; i++) {
     var radius = 1.5;
-
     var x = Math.random() * (innerWidth - radius * 2) + radius;
     var y = Math.random() * (innerHeight - radius * 2) + radius;
     var dx = ((Math.random() - 0.5) * particleSpeedVector);
