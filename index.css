@@ -1,8 +1,25 @@
 body {
     margin: 0;
-    background-color: black;
+    animation: pulse 5s infinite;
+    background-color: white;
 }
 
 canvas {
 
+}
+
+.element {
+  animation: pulse 20s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: black;;
+  }
+  50% {
+    background-color: white;
+  }
+  100% {
+    background-color: black;;
+  }
 }
