@@ -21,7 +21,7 @@ Particles is a molecular inspired animation that allows the user to interact wit
 
 ### Challenges
 
-* One of the most difficult and exciting things about this project was the implementation of the repulsion effect. The important thing to understand about repulsion was taking into account the angle of each particle relative to the mouse, and the quadrant the particle was in. The solution below was implemented to ensure that the dx and dy of each particle had the correct signs to push the particle to the correct final position, outside the effectDistance.
+* One of the most difficult and exciting things about this project was the implementation of the repulsion effect. The important thing to understand about repulsion was taking into account the angle of each particle relative to the mouse, and the particle's quadrant. Arctan2 was utilized as opposed to arctan because for a positive y you get an angle between 0 and π, and for negative y the result is between −π and 0. This was implemented to ensure that the change in x and y of each particle had the correct signs to push the particle to the correct final position, outside the effectDistance. 
 
 ```javascript
 if (distance(mouse, this) < effectDistance) {
