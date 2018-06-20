@@ -162,7 +162,7 @@ function drawline(circleObj1, circleObj2, opacity) {
     c.beginPath();
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
-    c.lineWidth = 0.5;
+    c.lineWidth = 0.4;
     c.strokeStyle= `rgba(255, 255, 255, ${opacity})`;
     c.stroke();
     c.closePath();
