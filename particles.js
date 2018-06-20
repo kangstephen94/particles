@@ -15,7 +15,7 @@ window.addEventListener('resize',
 var effectDistance = 150;
 var connectionDistance = 160;
 var numParticles = 100;
-var particleSpeedVector = 5;
+var particleSpeedVector = 4;
 var particleArray = [];
 var mode = 'repulse';
 var opacityFactor = 0.15;
