@@ -10,4 +10,4 @@ Particles was implemented using Canvas.
 
 ### Live Demo
 
-[https://kangstephen94.github.io/particles/](Particles)
+[Particles.js](https://kangstephen94.github.io/particles/)
