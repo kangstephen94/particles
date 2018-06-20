@@ -20,6 +20,7 @@ canvas {
 
 .particle-number {
     margin-bottom: 20px;
+    
 }
 
 .modal {
@@ -62,12 +63,26 @@ canvas {
     margin-left: 25px;
     margin-top: 30px;
     color: white;
-    font-family: sans-serif;
+    font-family: 'Shadows Into Light', cursive;
     font-size: 13px;
     background-color: rgba(255, 255, 255, 0.2)
+    
 }
 
 .modal button:hover {
     background-color: black;
     color: white;
+}
+
+#particles-option select {
+    margin-left: 20px;
+     font-family: 'Shadows Into Light', cursive;
+}
+
+#particles-option p {
+    font-family: 'Shadows Into Light', cursive;
+}
+
+#particles-option label {
+    font-family: 'Shadows Into Light', cursive;
 }
