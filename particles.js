@@ -10,18 +10,33 @@ window.addEventListener('resize',
         init();
     }
 );
-
-
 var repulsionDistance = 150;
-var connectionDistance = 125;
-var numParticles = 500;
-var particleSpeedVector = 2;
+var connectionDistance = 160;
+var numParticles = 100;
+var particleSpeedVector = 5;
 var particleArray = [];
-
+var mode = 'repulse';
+var opacityFactor = 0.16;
 var mouse = {
     x: undefined,
     y: undefined,
 };
+
+var numParticlesOption = document.getElementById('particlesNumber');
+numParticlesOption.addEventListener('change', 
+    function () {
+        numParticles = numParticlesOption.value;
+        createCircles();
+    }
+);
+
+var modeOption = document.getElementById('mode');
+modeOption.addEventListener('change',
+    function () {
+        mode = modeOption.value;
+    }
+);
+
 
 var colorArray = [
     '#ff0000',
@@ -80,22 +95,42 @@ function Circle(x, y, dx, dy, radius, boundary) {
         this.y += this.dy;
         this.draw();
 
+        if (mode === "repulse") {
         if (distance(mouse, this) < repulsionDistance) {
             var dx = this.x - mouse.x;
             var dy = this.y - mouse.y;
             var angle = Math.atan2(dy, dx);
             var distancetoRadius = repulsionDistance - (distance(mouse, this));
-
             var newXchange = Math.cos(angle) * distancetoRadius;
             var newYchange = Math.sin(angle) * distancetoRadius;
-            this.x += newXchange + 1;
-            this.y += newYchange + 1;
+            this.x += newXchange;
+            this.y += newYchange;
+        }
+    } else if (mode==='grab') {
+        if (distance(mouse, this) < repulsionDistance) {
+            c.beginPath();
+            c.moveTo(mouse.x, mouse.y);
+            c.lineTo(this.x, this.y);
+            c.lineWidth = 1;
+            c.strokeStyle = "rgba(255, 0, 0, 1)";
+            c.stroke();
+            c.closePath();
+        }
+    } else if (mode==='bubble') {
+        if (distance(mouse,this) < repulsionDistance) {
+            if (this.radius < 30) {
+            this.radius += 1.5;
+            }
+        } 
+        }
+        if (this.radius > this.minRadius) {
+            this.radius -= 1;
         }
 
         for (var i = 0; i < particleArray.length; i++) {  
             var dist = distance(this, particleArray[i]);
             if (dist < connectionDistance) {
-                var fraction = (connectionDistance/dist)*0.15;
+                var fraction = (connectionDistance/dist)*opacityFactor;
                 drawline(this, particleArray[i], fraction);
             }
         }
@@ -140,14 +175,17 @@ function init() {
 
 }
 
-for (var i = 0; i < numParticles; i++) {
-    var radius = 1.5;
-    var x = Math.random() * (innerWidth - radius * 2) + radius;
-    var y = Math.random() * (innerHeight - radius * 2) + radius;
-    var dx = ((Math.random() - 0.5) * particleSpeedVector);
-    var dy = ((Math.random() - 0.5) * particleSpeedVector);
-    var boundary = 200;
-    particleArray.push(new Circle(x, y, dx, dy, radius, boundary));
+function createCircles () {
+    particleArray = [];
+    for (var i = 0; i < numParticles; i++) {
+        var radius = 1.5;
+        var x = Math.random() * (innerWidth - radius * 2) + radius;
+        var y = Math.random() * (innerHeight - radius * 2) + radius;
+        var dx = ((Math.random() - 0.5) * particleSpeedVector);
+        var dy = ((Math.random() - 0.5) * particleSpeedVector);
+        var boundary = 200;
+        particleArray.push(new Circle(x, y, dx, dy, radius, boundary));
+    }
 }
 
 function animate() {
@@ -158,4 +196,5 @@ function animate() {
     }
 }
 
+createCircles();
 animate();

@@ -4,21 +4,66 @@ body {
 }
 
 canvas {
-
+    position: relative;
 }
 
-.element {
-  animation: pulse 20s infinite;
+#particles-option {
+    background-color: transparent;
+    color: white;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    padding: 10px;
+    padding-left: 20px;
 }
 
-@keyframes pulse {
-  0% {
-    background-color: black;;
-  }
-  50% {
-    background-color: white;
-  }
-  100% {
-    background-color: black;;
-  }
+.particle-number {
+    margin-bottom: 20px;
+}
+
+.modal {
+    width: 200px;
+    height: 275px;
+    position: absolute;
+    background-color: transparent;
+    top: 36%;
+    left: 43%;
+    border: 1px solid white;
+    color: white;
+    font-family: 'Shadows Into Light', cursive;
+    z-index: 100;
+}
+
+.modal h1 {
+    text-align: center;
+    font-size: 40px;
+    line-height: 10px;
+}
+
+.modal p {
+    font-family: sans-serif;
+    font-size: 10px;
+    text-align: center;
+    color: red;
+}
+
+.modal img {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+.modal button {
+    display: block;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    margin-left: 25px;
+    margin-top: 30px;
+    color: black;
+}
+
+.modal button:hover {
+    background-color: black;
+    color: white;
 }
