@@ -57,8 +57,8 @@ window.addEventListener('mousemove',
 
 window.addEventListener('touchstart', 
     function(event) {
-        mouse.x = event.changedTouches[0].pageX;
-        mouse.y = event.changedTouches[0].pageY;
+        mouse.x = event.changedTouches[0].clientX;
+        mouse.y = event.changedTouches[0].clientY;
     }
 );
 
