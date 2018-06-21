@@ -55,7 +55,6 @@ window.addEventListener('mousemove',
     }
 );
 
-
 window.addEventListener('click', 
     function(event) {
         var x = (((Math.random()-0.5)*effectDistance) + mouse.x);
