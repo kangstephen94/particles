@@ -72,8 +72,8 @@ window.addEventListener('touchend',
 window.addEventListener('touchmove', 
     function (event) {
         for (var i = 0; i < event.changedTouches.length; i++) {
-        mouse.x = event.changedTouches[i].pageX;
-        mouse.y = event.changedTouches[i].pageY;
+        mouse.x = event.changedTouches[i].clientX;
+        mouse.y = event.changedTouches[i].clientY;
         }
     }
 );
