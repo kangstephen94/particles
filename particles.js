@@ -55,6 +55,29 @@ window.addEventListener('mousemove',
     }
 );
 
+window.addEventListener('touchstart', 
+    function(event) {
+        mouse.x = event.changedTouches[0].pageX;
+        mouse.y = event.changedTouches[0].pageY;
+    }
+);
+
+window.addEventListener('touchend', 
+    function(event) {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    }
+);
+
+window.addEventListener('touchmove', 
+    function (event) {
+        for (var i = 0; i < event.changedTouches.length; i++) {
+        mouse.x = event.changedTouches[i].pageX;
+        mouse.y = event.changedTouches[i].pageY;
+        }
+    }
+);
+
 window.addEventListener('click', 
     function(event) {
         var x = (((Math.random()-0.5)*effectDistance) + mouse.x);
