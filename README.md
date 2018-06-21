@@ -8,7 +8,8 @@ Particles is a molecular inspired animation that allows the user to interact wit
 ### Technologies
 
 * Javascript
-* HTML5 Canvas
+* HTML5
+* Canvas
 
 ### Key Features
 
@@ -18,10 +19,11 @@ Particles is a molecular inspired animation that allows the user to interact wit
   * Mouse hover: repulsion, attract, grab, bubble
 * Responsive design
   * Canvas readjusts to any window size
+  * Touch interaction mplemented on mobile
 
 ### Challenges
 
-* One of the most difficult and exciting things about this project was the implementation of the repulsion effect. The important thing to understand about repulsion was taking into account the angle of each particle relative to the mouse, and the particle's quadrant. Arctan2 was utilized as opposed to arctan because for a positive y you get an angle between 0 and π, and for negative y the result is between −π and 0. This was implemented to ensure that the change in x and y of each particle had the correct signs to push the particle to the correct final position, outside the effectDistance. 
+* One of the most difficult and exciting things about this project was the implementation of the repulsion effect. The important thing to understand about repulsion was taking into account the angle of each particle relative to the mouse, and the particle's quadrant. Arctan2 was utilized as opposed to arctan to return the correct sign for y values when the particle was at an angle between 0 and π, and between −π and 0. This following solution was implemented to ensure that the change in x and y of each particle had the correct signs to push the particle to the correct final position, outside the effectDistance.
 
 ```javascript
 if (distance(mouse, this) < effectDistance) {
