@@ -1,6 +1,8 @@
 # Particles
 [See it Live!](https://kangstephen94.github.io/particles/)
 
+![](https://preview.ibb.co/jpR6K8/Screen_Shot_2018_07_08_at_8_46_08_PM.png)
+
 ### Background and Overview
 
 Particles is a molecular inspired animation that allows the user to interact with particles on a canvas and manipulate their relationships to other particles based on proximity to each other and to the user's mouse.
